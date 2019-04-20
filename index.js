@@ -4,17 +4,11 @@ Toolkit.run(
   async tools => {
     tools.exit.success("We did it!");
 
-    const { branch, force = false, sourceBranch, tagPrefix } = tools.arguments;
+    const { branch, force = false, skipProtected = false } = tools.arguments;
 
     if (!branch) {
       return tools.exit.failure(
         "A branch option is required (i.e: --branch staging)"
-      );
-    }
-
-    if (!sourceBranch && tagPrefix) {
-      return tools.exit.failure(
-        "Options sourceBranch and tagPrefix can't be used together"
       );
     }
 
@@ -25,18 +19,23 @@ Toolkit.run(
       );
     }
 
-    if (sourceBranch && ref !== `heads/${sourceBranch}`) {
-      return tools.exit.neutral(
-        `Commit is not on the configured source branch '${sourceBranch}', ignoring`
-      );
-    }
+    if (ref.startsWith("tags/")) {
+      const {
+        data: heads
+      } = await tools.github.repos.listBranchesForHeadCommit({
+        ...tools.context.repo,
+        commit_sha: tools.context.sha
+      });
 
-    if (
-      tagPrefix &&
-      ref.startsWith("tags/") &&
-      !ref.startsWith(`tags/${tagPrefix}`)
-    ) {
-      return tools.exit.neutral("Tag doesn't match tagPrefix, ignoring");
+      if (!heads.length) {
+        return tools.exit.neutral("Tag isn't head of any branches");
+      }
+
+      if (!skipProtected && !heads.find(value => value.protected)) {
+        return tools.exit.neutral(
+          "A tag was pushed but isn't head of a protected branch, skipping"
+        );
+      }
     }
 
     await tools.github.git.updateRef({
@@ -46,5 +45,5 @@ Toolkit.run(
       force
     });
   },
-  { event: "push" }
+  { event: ["push", "release"] }
 );
