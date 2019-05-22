@@ -1,39 +1,40 @@
-const { Toolkit } = require("actions-toolkit");
+const { Toolkit } = require('actions-toolkit');
+
+// Allow for another token
+process.env.GITHUB_TOKEN = process.env.GITHUB_TOKEN || process.env.PAT_TOKEN;
 
 Toolkit.run(
   async tools => {
-    tools.exit.success("We did it!");
-
     const { branch, force = false, skipProtected = false } = tools.arguments;
 
     if (!branch) {
       return tools.exit.failure(
-        "A branch option is required (i.e: --branch staging)"
+        'A branch option is required (i.e: --branch staging)',
       );
     }
 
     const ref = tools.context.ref;
     if (ref === `heads/${branch}`) {
       return tools.exit.neutral(
-        "Commit is already on the destination branch, ignoring"
+        'Commit is already on the destination branch, ignoring',
       );
     }
 
-    if (ref.startsWith("tags/")) {
+    if (ref.startsWith('tags/')) {
       const {
-        data: heads
+        data: heads,
       } = await tools.github.repos.listBranchesForHeadCommit({
         ...tools.context.repo,
-        commit_sha: tools.context.sha
+        commit_sha: tools.context.sha,
       });
 
       if (!heads.length) {
-        return tools.exit.neutral("Tag isn't head of any branches");
+        return tools.exit.neutral('Tag isn\'t head of any branches');
       }
 
       if (!skipProtected && !heads.find(value => value.protected)) {
         return tools.exit.neutral(
-          "A tag was pushed but isn't head of a protected branch, skipping"
+          'A tag was pushed but isn\'t head of a protected branch, skipping',
         );
       }
     }
@@ -42,8 +43,8 @@ Toolkit.run(
       ...tools.context.repo,
       sha: tools.context.sha,
       ref: `heads/${branch}`,
-      force
+      force,
     });
   },
-  { event: ["push", "release"] }
+  { event: ['push', 'release'] },
 );

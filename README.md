@@ -22,7 +22,7 @@ action "Update branch" {
   needs = "Master"
   uses = "Embraser01/update-git-branch-action@master"
   args = "--branch staging --force"
-  secrets = ["GITHUB_TOKEN"]
+  secrets = ["PAT_TOKEN"]
 }
 ```
 
@@ -43,9 +43,16 @@ action "Update branch" {
   needs = "Tag"
   uses = "Embraser01/update-git-branch-action@master"
   args = "--branch stable"
-  secrets = ["GITHUB_TOKEN"]
+  secrets = ["PAT_TOKEN"]
 }
 ```
+
+## Github token
+
+Because the `GITHUB_TOKEN` will not trigger another workflow, the action allow another secret
+`PAT_TOKEN` to be used (only if not `GITHUB_TOKEN` is not provided).
+
+You can generate a Personal Access Token [here](https://github.com/settings/tokens).
 
 ## Tags
 
