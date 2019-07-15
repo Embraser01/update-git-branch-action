@@ -2,6 +2,7 @@
   "name": "update-git-branch-action",
   "private": true,
   "main": "index.js",
+  "version": "0.0.1",
   "scripts": {
     "start": "node ./index.js",
     "test": "jest"
@@ -10,7 +11,6 @@
     "actions-toolkit": "^2.1.0"
   },
   "devDependencies": {
-    "jest": "^24.5.0"
-  },
-  "version": "0.0.1"
+    "jest": "^24.8.0"
+  }
 }
