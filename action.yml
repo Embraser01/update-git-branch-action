@@ -1,0 +1,19 @@
+name: 'Update git branch'
+description: 'Update a branch to a specific ref'
+author: 'Marc-Antoine Fernandes'
+inputs:
+  branch:
+    description: 'Branch updated by this action'
+    required: true
+  force:
+    description: 'Whether to use -f flag to update the branch'
+    default: 0
+  githubToken:
+    description: 'Repo''s Github token'
+    required: true
+  fromProtectedOnly:
+    description: 'Ensure that the origin commit is already the head of one protected branch'
+      default: 1
+runs:
+  using: 'node12'
+  main: 'lib/main.js'
