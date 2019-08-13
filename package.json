@@ -1,16 +1,40 @@
 {
-  "name": "update-git-branch-action",
+  "name": "node12-template-action",
+  "version": "0.0.0",
   "private": true,
-  "main": "index.js",
-  "version": "0.0.1",
+  "description": "Node 12 template action",
+  "main": "lib/main.js",
   "scripts": {
-    "start": "node ./index.js",
+    "build": "yarn pnpify tsc",
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Embraser01/update-git-branch-action.git"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup"
+  ],
+  "author": "Marc-Antoine Fernandes",
+  "license": "MIT",
   "dependencies": {
-    "actions-toolkit": "^2.1.0"
+    "@actions/core": "^1.0.0",
+    "@actions/exec": "^1.0.0",
+    "@actions/github": "^1.0.0",
+    "@actions/io": "^1.0.0",
+    "@actions/tool-cache": "^1.0.0",
+    "semver": "^6.1.1"
   },
   "devDependencies": {
-    "jest": "^24.8.0"
+    "@berry/pnpify": "^0.1.0",
+    "@types/jest": "^24.0.17",
+    "@types/node": "^12.0.4",
+    "@types/semver": "^6.0.0",
+    "jest": "^24.8.0",
+    "jest-circus": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.1"
   }
 }

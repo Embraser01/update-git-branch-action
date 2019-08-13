@@ -1,0 +1,17 @@
+name: "PR Checks"
+on: [pull_request, push]
+
+jobs:
+  check_pr:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: "yarn"
+      run: yarn
+
+    - name: "yarn build"
+      run: yarn build
+#   Disabled tests for now as it doesn't work with ts-jest
+#    - name: "yarn test"
+#      run: yarn test
