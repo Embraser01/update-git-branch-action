@@ -13,9 +13,11 @@ inputs:
     required: true
   fromProtectedOnly:
     description: 'Ensure that the origin commit is already the head of one protected branch'
-      default: 1
+    default: 1
 runs:
   using: 'node12'
+  env:
+    NODE_OPTIONS: '--require "./.pnp.js"'
   main: 'lib/main.js'
 branding:
   icon: 'fast-forward'
