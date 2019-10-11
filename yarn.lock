@@ -3342,27 +3342,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node12-template-action@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "node12-template-action@workspace:."
-  dependencies:
-    "@actions/core": "npm:^1.1.3"
-    "@actions/exec": "npm:^1.0.1"
-    "@actions/github": "npm:^1.1.0"
-    "@actions/io": "npm:^1.0.1"
-    "@actions/tool-cache": "npm:^1.1.2"
-    "@types/jest": "npm:^24.0.18"
-    "@types/node": "npm:^12.7.12"
-    "@types/semver": "npm:^6.0.2"
-    "@yarnpkg/pnpify": "npm:^2.0.0-rc.6"
-    jest: "npm:^24.9.0"
-    jest-circus: "npm:^24.9.0"
-    semver: "npm:^6.3.0"
-    ts-jest: "npm:^24.1.0"
-    typescript: "npm:^3.6.4"
-  languageName: unknown
-  linkType: soft
-
 "nopt@npm:2 || 3":
   version: 3.0.6
   resolution: "nopt@npm:3.0.6"
@@ -4753,6 +4732,27 @@ __metadata:
   checksum: 0847cb940e83453620e0f2ea35d165bd9d148a2c76f91bbc53a7fb5aec70db1c7f05eb4a30a7a8e7a7b0260ec5ed8bfee63c1e936d77328f68e3beca5bdf743a
   languageName: node
   linkType: hard
+
+"update-git-branch-action@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "update-git-branch-action@workspace:."
+  dependencies:
+    "@actions/core": "npm:^1.1.3"
+    "@actions/exec": "npm:^1.0.1"
+    "@actions/github": "npm:^1.1.0"
+    "@actions/io": "npm:^1.0.1"
+    "@actions/tool-cache": "npm:^1.1.2"
+    "@types/jest": "npm:^24.0.18"
+    "@types/node": "npm:^12.7.12"
+    "@types/semver": "npm:^6.0.2"
+    "@yarnpkg/pnpify": "npm:^2.0.0-rc.6"
+    jest: "npm:^24.9.0"
+    jest-circus: "npm:^24.9.0"
+    semver: "npm:^6.3.0"
+    ts-jest: "npm:^24.1.0"
+    typescript: "npm:^3.6.4"
+  languageName: unknown
+  linkType: soft
 
 "uri-js@npm:^4.2.2":
   version: 4.2.2
