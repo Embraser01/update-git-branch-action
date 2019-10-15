@@ -2,3 +2,5 @@
 node_modules/
 coverage/
 ../__tests__/runner/*
+
+.DS_Store

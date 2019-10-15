@@ -11,9 +11,8 @@ async function run() {
   try {
     const branch = core.getInput('branch');
     const force = !!core.getInput('force');
-    const fromProtectedOnly = core.getInput('fromProtectedOnly');
 
-    const res = await updateBranch({ octokit, ...context, branch, force, fromProtectedOnly });
+    const res = await updateBranch({ octokit, ...context, branch, force });
 
     if (res) {
       core[res.type](res.msg);
