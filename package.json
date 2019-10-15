@@ -1,12 +1,16 @@
 {
   "name": "update-git-branch-action",
   "version": "0.1.1",
+  "nextVersion": {
+    "semver": "1.0.0",
+    "nonce": "7895560161287865"
+  },
   "description": "Node 12 template action",
   "main": "lib/main.js",
   "scripts": {
     "build": "yarn pnpify tsc",
-    "test": "jest",
-    "version": "yarn run build && git add lib/main.js"
+    "test": "pnpify jest",
+    "version": "yarn run build && git add lib/"
   },
   "repository": {
     "type": "git",
