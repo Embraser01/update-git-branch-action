@@ -1,6 +1,10 @@
 {
   "name": "update-git-branch-action",
   "version": "0.1.1",
+  "nextVersion": {
+    "semver": "1.0.0",
+    "nonce": "7895560161287865"
+  },
   "description": "Node 12 template action",
   "main": "lib/main.js",
   "scripts": {
