@@ -11,9 +11,6 @@ inputs:
   githubToken:
     description: 'Repo''s Github token'
     required: true
-  fromProtectedOnly:
-    description: 'Ensure that the origin commit is already the head of one protected branch'
-    default: 1
 runs:
   using: 'node12'
   env:

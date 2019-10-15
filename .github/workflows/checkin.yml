@@ -12,6 +12,6 @@ jobs:
 
     - name: "yarn build"
       run: yarn build
-#   Disabled tests for now as it doesn't work with ts-jest
-#    - name: "yarn test"
-#      run: yarn test
+
+    - name: "yarn test"
+      run: yarn test

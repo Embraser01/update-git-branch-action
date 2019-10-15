@@ -1,58 +1,34 @@
 # Update git branch action
 
-A GitHub Action that update a branch with current commit.
+A GitHub Action that update a specific branch to the current commit running the action.
 
 ## Usage
 
 This GitHub Action update a branch. Here's an example workflow that update a staging branch at
 each commit on master you push a commit on master:
 
-```workflow
-workflow "Update staging branch on push" {
-  on = "push"
-  resolves = ["Update branch"]
-}
-
-action "Master" {
-  uses = "actions/bin/filter@master"
-  args = "branch master"
-}
-
-action "Update branch" {
-  needs = "Master"
-  uses = "Embraser01/update-git-branch-action@master"
-  args = "--branch staging --force"
-  secrets = ["PAT_TOKEN"]
-}
-```
-
-You could also run this after a release is published (see [tags](#tags)):
-
-```workflow
-workflow "Update stable branch on release" {
-  on = "release"
-  resolves = ["Update branch"]
-}
-
-action "Tag" {
-  uses = "actions/bin/filter@master"
-  args = "tag v*"
-}
-
-action "Update branch" {
-  needs = "Tag"
-  uses = "Embraser01/update-git-branch-action@master"
-  args = "--branch stable"
-  secrets = ["PAT_TOKEN"]
-}
+```yaml
+on: push
+name: Update prod branch on release
+jobs:
+  updateBranch:
+    name: Update staging branch
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: Embraser01/update-git-branch-action@v1.0.0
+      if: github.ref == 'refs/heads/master'
+      with:
+        branch: staging
+        force: 1 # To push-force to the branch
+        githubToken: ${{ secrets.PAT_TOKEN }} # Github Token
 ```
 
 ## Github token
 
-Because the `GITHUB_TOKEN` will not trigger another workflow, the action allow another secret
-`PAT_TOKEN` to be used (only if not `GITHUB_TOKEN` is not provided).
-
-You can generate a Personal Access Token [here](https://github.com/settings/tokens).
+If you want to trigger another workflow, you'll need to generate a Personal Access Token
+[here](https://github.com/settings/tokens). Pushing a commit with the `GITHUB_TOKEN` env
+variable will not trigger other workflows.
 
 ## Tags
 
@@ -64,9 +40,6 @@ could fail if a commit was pushed before the action is started.
 ## Options
 
 - `branch`: The branch to update (**required**).
-- `skipProtected`: For tags, don't check for protected branch.
 - `force`: Indicates whether to force the update or to make sure the update is a fast-forward
   update. Leaving this out or setting it to `false` will make sure you're not overwriting work.
-
-> To filter the source branch or tags, use
-> [filter action](https://github.com/actions/bin/tree/master/filter).
+- `githubToken`: Github token required to push the commit to the branch.
