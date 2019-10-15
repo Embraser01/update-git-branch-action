@@ -90,7 +90,7 @@ describe('tag handling', () => {
       },
     });
 
-    expect(res).toBeUndefined();
+    expect(res).toBeNull();
   });
 });
 
@@ -104,7 +104,7 @@ it('should work if commit is head on protected branch', async () => {
     octokit: { git: { updateRef } },
   });
 
-  expect(res).toBeUndefined();
+  expect(res).toBeNull();
   expect(updateRef).toHaveBeenCalledWith(expect.objectContaining({
     sha: '0a8e3efc3b91cc0f006aadaced32a8d6f7d9261f',
     ref: 'heads/prod',
@@ -120,7 +120,7 @@ it('should pass the force option', async () => {
     force: true,
   });
 
-  expect(res).toBeUndefined();
+  expect(res).toBeNull();
   expect(updateRef).toHaveBeenCalledWith(expect.objectContaining({
     force: true,
   }));
